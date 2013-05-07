@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * Implements any hooks for GSB Navbar Test
+ */
+
+/**
+ * Implements hook_navbar().
+ */
+function gsb_admin_enhancements_navbar() {
+
+  global $user;
+
+  $items = array();
+
+  $has_workbench = user_access('access workbench', $user);
+
+  if ($has_workbench) {
+
+    // The 'workbench' tab is a simple link, with no corresponding tray.
+    $items['workbench'] = array(
+      '#type' => 'navbar_item',
+      'tab' => array(
+        '#type' => 'link',
+        '#title' => t('My Workbench'),
+        '#href' => 'admin/workbench',
+        '#options' => array(
+          'attributes' => array(
+            'title' => t('My Workbench'),
+            'class' => array('icon', 'icon-workbench'),
+          ),
+        ),
+      ),
+      '#weight' => -15,
+    );
+  
+  }
+
+  return $items;
+}
+
+/**
+ * Implements hook_navbar_alter().
+ */
+function gsb_admin_enhancements_navbar_alter(&$items) {
+
+  if (isset($items['home'])) {
+
+    $items['home']['tab']['#title'] = '';
+
+  }
+
+}  
