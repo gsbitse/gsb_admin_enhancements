@@ -1,0 +1,5 @@
+name = GSB Admin Enhancements
+description = "Provides enhancements for the admin interface."
+package = GSB
+core = 7.x
+dependencies[] = navbar
